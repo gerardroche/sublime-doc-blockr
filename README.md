@@ -1,10 +1,6 @@
-DocBlockr
-=========
+# DocBlockr
 
-DocBlockr is a package for [Sublime Text 2 & 3][sublime] which makes writing
-documentation a breeze. DocBlockr supports **JavaScript** (including ES6), **PHP**,
-**ActionScript**, **Haxe**, **CoffeeScript**, **TypeScript**, **Java**, **Apex**, **Groovy**,
-**Objective C**, **C**, **C++** and **Rust**.
+DocBlockr is a package for [Sublime Text 2 & 3][sublime] which makes writing documentation a breeze. DocBlockr supports **JavaScript** (including ES6), **PHP**, **ActionScript**, **Haxe**, **CoffeeScript**, **TypeScript**, **Java**, **Apex**, **Groovy**, **Objective C**, **C**, **C++** and **Rust**.
 
 ## Installation
 
@@ -194,7 +190,30 @@ Finally, typing `@` inside a docblock will show a completion list for all tags s
 
 ## Configuration
 
+### User settings
+
 You can access the configuration settings by selecting `Preferences -> Package Settings -> DocBlockr`.
+
+### Per-project settings
+
+To set per-project settings use a "docblockr" key in the project definition settings: `Project > Edit Project`
+
+```json
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "docblockr": {
+            "key": "value"
+        }
+    }
+}
+```
+
+### Settings
 
 *The `jsdocs_*` prefix is a legacy from days gone by...*
 
