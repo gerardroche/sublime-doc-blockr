@@ -133,7 +133,5 @@
   "docblockr.decorate": true,
 
   // If set to true, typing /**<space> will open an inline docblock
-  "docblockr.quick_open_inline": true,
-
-  "docblockr.development_mode": false
+  "docblockr.quick_open_inline": true
 }

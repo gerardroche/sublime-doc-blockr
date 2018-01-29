@@ -1,78 +1,7 @@
-import sublime
-import sublime_plugin
-import unittest
+from DocBlockr.tests import unittest
 
 
-class __docblockr_test_replace_cursor_position(sublime_plugin.TextCommand):
-    def run(self, edit):
-        cursor_placeholder = self.view.find('\\|', 0)
-
-        if not cursor_placeholder or cursor_placeholder.empty():
-            return
-
-        self.view.sel().clear()
-        self.view.sel().add(cursor_placeholder.begin())
-        self.view.replace(edit, cursor_placeholder, '')
-
-
-class ViewTestCase(unittest.TestCase):
-
-    def setUp(self):
-        self.window = sublime.active_window()
-        self.view = self.window.new_file()
-        self.view.set_scratch(True)
-
-        # TODO there's probably a better way to initialise the testcase default settings
-        settings = self.view.settings()
-        settings.set('auto_indent', False)
-        settings.set('docblockr.lower_case_primitives', False)
-        settings.set('docblockr.param_description', True)
-        settings.set('docblockr.per_section_indent', False)
-        settings.set('docblockr.return_description', True)
-        settings.set('docblockr.short_primitives', False)
-        settings.set('docblockr.spacer_between_sections', False)
-        settings.set('docblockr.function_description', True)
-
-        if int(sublime.version()) < 3000:
-            self.edit = self.view.begin_edit()
-
-    def tearDown(self):
-        if int(sublime.version()) < 3000:
-            self.view.sel().clear()
-            self.view.end_edit(self.edit)
-            self.window.run_command('close')
-        else:
-            self.view.close()
-
-    def set_view_content(self, content):
-        if isinstance(content, list):
-            content = '\n'.join(content)
-        self.view.run_command('insert', {'characters': content})
-        self.view.run_command('__docblockr_test_replace_cursor_position')
-        self.view.set_syntax_file(self.get_syntax_file())
-
-    def get_syntax_file(self):
-        raise NotImplementedError('Must be implemented')
-
-    def get_view_content(self):
-        return self.view.substr(sublime.Region(0, self.view.size()))
-
-    def run_doc_blockr(self):
-        self.view.run_command('jsdocs')
-
-    def assertDocBlockrResult(self, expected):
-        if isinstance(expected, list):
-            expected = '\n'.join(expected)
-
-        # TODO test selections; for now just removing the placeholders
-        expected = expected.replace('|CURSOR|', '')
-        expected = expected.replace('|SELECTION_BEGIN|', '')
-        expected = expected.replace('|SELECTION_END|', '')
-
-        self.assertEquals(expected, self.get_view_content())
-
-
-class TestJavaScript(ViewTestCase):
+class TestJavaScript(unittest.ViewTestCase):
 
     def get_syntax_file(self):
         return 'Packages/JavaScript/JavaScript.tmLanguage'
@@ -237,7 +166,7 @@ class TestJavaScript(ViewTestCase):
         ])
 
 
-class TestPHP(ViewTestCase):
+class TestPHP(unittest.ViewTestCase):
 
     def get_syntax_file(self):
         # Allows overriding with custom syntax
@@ -418,27 +347,3 @@ class TestPHP(ViewTestCase):
             " */",
             "function fname($a) {}"
         ])
-
-
-class RunDocBlockrTests(sublime_plugin.WindowCommand):
-
-    def run(self):
-
-        self.window.run_command('show_panel', {'panel': 'console'})
-
-        print('')
-        print('DocBlockr Tests')
-        print('===============')
-
-        suite = unittest.TestSuite()
-        test_loader = unittest.TestLoader()
-
-        # TODO move all test cases into tests directory and make test loader auto load testcases from the folder
-
-        suite.addTests(test_loader.loadTestsFromTestCase(TestJavaScript))
-        suite.addTests(test_loader.loadTestsFromTestCase(TestPHP))
-
-        # TODO toggle test verbosity
-        unittest.TextTestRunner(verbosity=1).run(suite)
-
-        self.window.focus_group(self.window.active_group())
