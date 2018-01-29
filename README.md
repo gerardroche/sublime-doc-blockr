@@ -4,24 +4,23 @@ DocBlockr is a package for [Sublime Text 2 & 3][sublime] which makes writing doc
 
 ## Installation
 
-### [Package Control](https://sublime.wbond.net/installation)
+### Package Control installation
 
-1. Open Package Control: `Preferences -> Package Control`
-2. Select `Package Control: Install Package`
-3. Type `DocBlockr` into the search box and select the package to install it
+The preferred method of installation is [Package Control](https://packagecontrol.io/packages/DocBlockr).
 
 ### Manual installation
 
-1. Download the latest [tag](https://github.com/spadgos/sublime-jsdocs/tags)
-2. Unzip it and move the unzipped directory to ```packages``` folder, **could be figured out through ```Preferences->Browse Packages ...```** 
-3. Rename the unzipped directory to ```DocBlockr```
-4. If the extension didn't work, ensure we don't have the package disabled by removing the ```DocBlockr``` entry from the ```ignored_packages``` in ```sub3\Data\Packages\User\Preferences.sublime-settings```
+Close Sublime Text, then download or clone this repository to a directory named `DocBlockr` in the Sublime Text Packages directory for your platform:
+
+* Linux: `git clone https://github.com/spadgos/sublime-jsdocs.git ~/.config/sublime-text-3/Packages/DocBlockr`
+* OSX: `git clone https://github.com/spadgos/sublime-jsdocs.git ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/DocBlockr`
+* Windows: `git clone https://github.com/spadgos/sublime-jsdocs.git %APPDATA%\Sublime/ Text/ 3/Packages/DocBlockr`
 
 ## Feature requests & bug reports
 
 You can leave either of these things [here][issues]. Pull requests are welcomed
 heartily, but please read [CONTRIBUTING.md][contrib] first! Basically: in this
-repo, the main development branch is `develop` and the stable 'production'
+repository, the main development branch is `develop` and the stable 'production'
 branch is `master`. Please remember to base your branch from `develop` and issue
 the pull request back to that branch.
 
@@ -31,7 +30,7 @@ the pull request back to that branch.
 
 ## Changelog
 
-See [the history file][history].
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## Usage
 
@@ -266,7 +265,6 @@ This package was created by [Nick Fisher][spadgos], but has many contributions f
 [closure]: http://code.google.com/closure/compiler/docs/js-for-compiler.html
 [contrib]: https://github.com/spadgos/sublime-jsdocs/blob/master/CONTRIBUTING.md
 [contributors]: https://github.com/spadgos/sublime-jsdocs/blob/master/CONTRIBUTORS.md
-[history]: https://github.com/spadgos/sublime-jsdocs/blob/master/HISTORY.md
 [issues]: https://github.com/spadgos/sublime-jsdocs/issues
 [jsdoc]: http://code.google.com/p/jsdoc-toolkit/wiki/TagReference
 [magicmethods]: http://www.php.net/manual/en/language.oop5.magic.php
