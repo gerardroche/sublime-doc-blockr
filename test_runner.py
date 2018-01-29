@@ -2,9 +2,10 @@ import sublime
 import sublime_plugin
 import unittest
 
+
 class __docblockr_test_replace_cursor_position(sublime_plugin.TextCommand):
     def run(self, edit):
-        cursor_placeholder = self.view.find('\|', 0)
+        cursor_placeholder = self.view.find('\\|', 0)
 
         if not cursor_placeholder or cursor_placeholder.empty():
             return
@@ -12,6 +13,7 @@ class __docblockr_test_replace_cursor_position(sublime_plugin.TextCommand):
         self.view.sel().clear()
         self.view.sel().add(cursor_placeholder.begin())
         self.view.replace(edit, cursor_placeholder, '')
+
 
 class ViewTestCase(unittest.TestCase):
 
@@ -68,6 +70,7 @@ class ViewTestCase(unittest.TestCase):
         expected = expected.replace('|SELECTION_END|', '')
 
         self.assertEquals(expected, self.get_view_content())
+
 
 class TestJavaScript(ViewTestCase):
 
@@ -140,7 +143,7 @@ class TestJavaScript(ViewTestCase):
             'function foo (bar, baz) {'
         ])
 
-    def test_parameters_are_added_to_function_template_with_description_disabled_and_spacer_after_description_isset(self):
+    def test_parameters_are_added_to_function_template_with_description_disabled_and_spacer_after_description_isset(self):  # noqa: E501
         self.set_view_content('/**|\nfunction foo (bar, baz) {')
         self.view.settings().set('docblockr.function_description', False)
         self.view.settings().set('docblockr.spacer_between_sections', 'after_description')
@@ -233,6 +236,7 @@ class TestJavaScript(ViewTestCase):
             'var foo = bar;'
         ])
 
+
 class TestPHP(ViewTestCase):
 
     def get_syntax_file(self):
@@ -249,7 +253,8 @@ class TestPHP(ViewTestCase):
         self.assertDocBlockrResult('<?php\n/**\n * \n */\nbasic')
 
     def test_issue_292_php_args_pass_by_reference_missing_ampersand_char(self):
-        self.set_view_content("<?php\n/**|\nfunction function_name($a1,  $a2 = 'x', array $a3, &$b1, &$b2 = 'x', array &$b3) {}")
+        self.set_view_content(
+            "<?php\n/**|\nfunction function_name($a1,  $a2 = 'x', array $a3, &$b1, &$b2 = 'x', array &$b3) {}")
         self.run_doc_blockr()
         self.assertDocBlockrResult([
             "<?php",
@@ -413,6 +418,7 @@ class TestPHP(ViewTestCase):
             " */",
             "function fname($a) {}"
         ])
+
 
 class RunDocBlockrTests(sublime_plugin.WindowCommand):
 
