@@ -10,6 +10,13 @@ DocBlockr is a package for [Sublime Text 2 & 3][sublime] which makes writing doc
 2. Select `Package Control: Install Package`
 3. Type `DocBlockr` into the search box and select the package to install it
 
+### Manual installation
+
+1. Download the latest [tag](https://github.com/spadgos/sublime-jsdocs/tags)
+2. Unzip it and move the unzipped directory to ```packages``` folder, **could be figured out through ```Preferences->Browse Packages ...```** 
+3. Rename the unzipped directory to ```DocBlockr```
+4. If the extension didn't work, ensure we don't have the package disabled by removing the ```DocBlockr``` entry from the ```ignored_packages``` in ```sub3\Data\Packages\User\Preferences.sublime-settings```
+
 ## Feature requests & bug reports
 
 You can leave either of these things [here][issues]. Pull requests are welcomed
