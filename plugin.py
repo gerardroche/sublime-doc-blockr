@@ -21,10 +21,17 @@ def plugin_loaded():
 
 
 def migrate_old_settings():
-    view = sublime.active_window().active_view()
+    window = sublime.active_window()
+    view = window.active_view()
     if view:
         if view.settings().has('docblockr.old_settings_migrated'):
             return  # settings have already been migrated
+    else:
+        # The active view might an image, in which case active_view() returns false.
+        for view in window.views():
+            if view:
+                if view.settings().has('docblockr.old_settings_migrated'):
+                    return  # settings have already been migrated
 
     print('')
     print('[docblockr] migrating old docblockr settings')
