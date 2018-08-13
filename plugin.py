@@ -455,7 +455,7 @@ class JsdocsParser(object):
                 "}" if self.settings['curlyTypes'] else ""
             ))
         else:
-            out.append("${1:[%s description]}" % (escape(name)))
+            # out.append("${1:[%s description]}" % (escape(name)))
             out.append("@%s %s${1:%s}%s" % (
                 self.settings['typeTag'],
                 "{" if self.settings['curlyTypes'] else "",
