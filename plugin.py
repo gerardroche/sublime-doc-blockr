@@ -285,7 +285,7 @@ class JsdocsCommand(sublime_plugin.TextCommand):
         def outputWidth(str):
             # get the length of a string, after it is output as a snippet,
             # "${1:foo}" --> 3
-            return len(re.sub("[$][{]\\d+:([^}]+)[}]", "\\1", str).replace('\$', '$'))
+            return len(re.sub("[$][{]\\d+:([^}]+)[}]", "\\1", str).replace('\\$', '$'))
 
         # count how many columns we have
         maxCols = 0
